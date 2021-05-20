@@ -1,0 +1,5 @@
+### Python Folders ###
+__pycache__/
+
+### Virtual Enviroment ###
+/pyCuda
