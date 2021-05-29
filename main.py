@@ -2,14 +2,14 @@ import numpy as np
 
 # Importacion de librerias personalizadas
 from image import array2image, array2vector, load_image, save_image
-from processing import rgb2gray
+from processing import rgb2gray, erosion
 
 
 def main():
     # Nombres de los archivos a procesar
     input_name = 'shingeki.jpeg'
     output_name = 'shingeki_gray.jpeg'
-
+    """
     # Carga de la imagen de entrada
     input_image = load_image(input_name)
     # Conversion de la imagen de entrada a vector
@@ -26,6 +26,18 @@ def main():
     output_image = array2image(output_image_array)
     # Guardado de la imagen procesada
     save_image(output_image, output_name)
+    """
+    image = np.array([[0,0,1,0,0],
+                      [1,1,1,1,0],
+                      [0,0,1,0,0],
+                      [1,1,1,1,1],
+                      [0,0,1,0,0],
+                      [0,0,1,0,0]])
+    kernel = np.array([[0,0,0],
+                       [1,1,1],
+                       [0,0,0]])
+    t = erosion(image, kernel, image.shape[0], image.shape[1])
+    print(t)
 
 
 if __name__=='__main__':
