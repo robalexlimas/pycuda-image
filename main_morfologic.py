@@ -2,9 +2,7 @@ import numpy as np
 
 # Importacion de librerias personalizadas
 from image import array2image, array2vectorgray, load_image, save_image
-from gray2bin import gray2bin
-from dilatation import dilatation
-from erosion import erosion
+from processing import rgb2gray, gray2bin, erosion, dilatation
 
 
 def main():

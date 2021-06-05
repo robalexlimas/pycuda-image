@@ -29,6 +29,7 @@ def array2vectorrgb(image):
 
     return np.array(image_array_list)
 
+
 def array2vectorgray(image):
     height, width= image.shape
     image_array_list = []
@@ -38,6 +39,7 @@ def array2vectorgray(image):
             image_array_list.append(image[row][column])
 
     return np.array(image_array_list)
+
 
 def array2image(image_array):
     """
