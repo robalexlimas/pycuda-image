@@ -20,30 +20,29 @@ def main():
         input_image.getdata()).reshape(input_image.size[1], input_image.size[0], 3
     )
     image_gray = image[:,:,0]
-    image_grayscale = array2vectorgray(image_gray)
 
     # Tamano de la imagen original
     height_img, width_img = image_gray.shape
 
     # Conversion a escala de grises
     threshold = 150
-    output_binarized = gray2bin(image_grayscale, height_img, width_img, threshold)
+    output_binarized = gray2bin(image_gray, threshold)
 
     filter=np.array([[0,0,0,0,0],
                     [0,0,0,0,0],
                     [1,1,1,1,1],
                     [0,0,0,0,0],
                     [0,0,0,0,0]])
-    height_fil, width_fil = filter.shape
 
     # Dilatacion y erosion
-    output_dilatation = dilatation(output_binarized, height_img, width_img, filter, height_fil, width_fil)
-    output_erosion = erosion(output_binarized, height_img, width_img, filter, height_fil, width_fil)
+    output_dilatation = dilatation(output_binarized, filter)
+    output_erosion = erosion(output_binarized, filter)
 
     # Conversion del array resultante a formato imagen
     output1_image = array2image(output_binarized)
     output2_image = array2image(output_dilatation)
     output3_image = array2image(output_erosion)
+    
     # Guardado de la imagen procesada
     save_image(output1_image, output1_name)
     save_image(output2_image, output2_name)
