@@ -11,7 +11,7 @@ def load_image(filename, folder="images"):
     return Image.open(image_path)
 
 
-def array2vectorrgb(image):
+def array2vector_rgb(image):
     """
     Metodo para convertir imagen de entrada a un vector
     """
@@ -26,7 +26,7 @@ def array2vectorrgb(image):
     return np.array(image_array_list)
 
 
-def array2vectorgray(image):
+def array2vector_gray(image):
     height, width= image.shape
     image_array_list = []
 
