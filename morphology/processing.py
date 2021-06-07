@@ -65,8 +65,9 @@ def erosion(image, kernel, height, width):
         'kernel_center_y': str(int((kernel.shape[0] - 1) / 2)),
         'rows_kernel': str(kernel.shape[0]),
         'columns_kernel': str(kernel.shape[1])
-    }  
-    # LLamdo del kernel
+    }
+    
+    # Llamado del kernel
     mod = compiler.SourceModule(kernel_code)
     erosion_function = mod.get_function('erosion')
     # Ejecucion del kernel
