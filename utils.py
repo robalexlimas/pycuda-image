@@ -1,8 +1,9 @@
 # Libraries
 import numpy as np
-from string import Template
 import pycuda.driver as cuda
 import os
+
+from string import Template
 
 
 def copy_host_to_device(*hots_variables):
