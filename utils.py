@@ -10,7 +10,7 @@ def copy_host_to_device(*hots_variables):
     device_mem_allocations = []
     for index in range(len(hots_variables)):
         # Memory allocation
-        device_mem_allocation = memory_allocation(hots_variables[index].astype(np.float32))
+        device_mem_allocation = memory_allocation(hots_variables[index].astype(np.uint32))
         # Copy host information to device
         cuda.memcpy_htod(device_mem_allocation, hots_variables[index])
         device_mem_allocations.append(device_mem_allocation)

@@ -1,32 +1,35 @@
 import numpy as np
 
 # Importacion de librerias personalizadas
-from image import array2image, array2vectorgray, load_image, save_image
-from processing import rgb2gray, gray2bin, erosion, dilatation
+from image import array2image, array2vector_rgb, array2vector_gray, load_image, save_image 
+from color_processing.processing import rgb2gray, gray2bin
+from morphology.processing import dilatation
 
 
 def main():
-    # Nombres de los archivos a procesar
-    input_name = 'shingeki_gray.jpeg'
-    output1_name = 'shingeki_binared.jpeg'
-    output2_name = 'shingeki_dilated.jpeg'
-    output3_name = 'shingeki_erosioned.jpeg'
+    # Files names
+    input_name = 'shingeki.jpeg'
+    output1_name = 'shingeki_gray.jpeg'
+    output2_name = 'shingeki_binared.jpeg'
+    output3_name = 'shingeki_dilated.jpeg'
+    output4_name = 'shingeki_erosioned.jpeg'
 
-    # Carga de la imagen de entrada
     input_image = load_image(input_name)
 
-    # Conversion de la imagen de entrada a vector
+    # Convert format input image to vector
     image = np.array(
         input_image.getdata()).reshape(input_image.size[1], input_image.size[0], 3
     )
-    image_gray = image[:,:,0]
+    image_vector = array2vector_rgb(image)
 
-    # Tamano de la imagen original
-    height_img, width_img = image_gray.shape
+    # Image size
+    width, height = input_image.size[0], input_image.size[1]
 
-    # Conversion a escala de grises
+
+    output_rgb2gray = rgb2gray(image_vector, width, height)
+
     threshold = 150
-    output_binarized = gray2bin(image_gray, threshold)
+    output_binarized = gray2bin(output_rgb2gray, threshold)
 
     filter=np.array([[0,0,0,0,0],
                     [0,0,0,0,0],
@@ -34,19 +37,21 @@ def main():
                     [0,0,0,0,0],
                     [0,0,0,0,0]])
 
-    # Dilatacion y erosion
+
     output_dilatation = dilatation(output_binarized, filter)
-    output_erosion = erosion(output_binarized, filter)
+    #output_erosion = erosion(output_binarized, filter)
 
     # Conversion del array resultante a formato imagen
-    output1_image = array2image(output_binarized)
-    output2_image = array2image(output_dilatation)
-    output3_image = array2image(output_erosion)
+    output1_image = array2image(output_rgb2gray)
+    output2_image = array2image(output_binarized)
+    output3_image = array2image(output_dilatation)
+    #output4_image = array2image(output_erosion)
     
     # Guardado de la imagen procesada
     save_image(output1_image, output1_name)
     save_image(output2_image, output2_name)
     save_image(output3_image, output3_name)
+    #save_image(output4_image, output4_name)
 
 
 if __name__=='__main__':

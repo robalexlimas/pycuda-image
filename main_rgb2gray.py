@@ -1,7 +1,7 @@
 # Libraries
 import numpy as np
 
-from image import array2image, array2vector, load_image, save_image
+from image import array2image, array2vector_rgb, load_image, save_image
 from color_processing.processing import rgb2gray
 
 
@@ -15,7 +15,7 @@ def main():
     image = np.array(
         input_image.getdata()).reshape(input_image.size[1], input_image.size[0], 3
     )
-    image_vector = array2vector(image)
+    image_vector = array2vector_rgb(image)
     # Image size
     width, height = input_image.size[0], input_image.size[1]
 

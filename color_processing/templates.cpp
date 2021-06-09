@@ -15,3 +15,23 @@ __global__ void rgb2gray(unsigned int *grayImage, unsigned int *rgbImage)
         grayImage[grayOffset] = int((r + g + b) / 3); 
     }
 }
+
+
+__global__ void gray2bin( float *grayimage, float *binimage)
+{
+    int tx = threadIdx.x + blockDim.x * blockIdx.x;
+    int ty = threadIdx.y + blockDim.y * blockIdx.y;
+
+    if(tx < $width && ty < $height){  
+
+        int offsetgray = ty * $width + tx;
+
+        if(grayimage[offsetgray] < $threshold){
+
+            binimage[offsetgray] = 0;
+        }
+        else{
+            binimage[offsetgray] = 1;
+        }
+    }
+}
