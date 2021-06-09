@@ -46,9 +46,9 @@ def gray2bin(gray_image, threshold):
     columns_device = round(height_image/100)
 
     # Creating vectors for processing
-    gray_image_host = np.array(gray_image).astype(np.uint32)
-    binarized_image_host = np.zeros((height_image, width_image)).astype(np.uint32)
-
+    gray_image_host = np.array(gray_image).astype(np.float32)
+    binarized_image_host = np.zeros((height_image, width_image)).astype(np.float32)
+    
     gray_image_device, binarized_image_device = copy_host_to_device(gray_image_host, binarized_image_host)
 
     path = os.path.dirname(os.path.abspath(__file__))
