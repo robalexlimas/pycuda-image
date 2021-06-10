@@ -14,7 +14,7 @@ def copy_host_to_device(*hots_variables):
         # Copy host information to device
         cuda.memcpy_htod(device_mem_allocation, hots_variables[index])
         device_mem_allocations.append(device_mem_allocation)
-    return device_mem_allocations
+    return device_mem_allocations if len(device_mem_allocations) > 1 else device_mem_allocation
 
 
 def memory_allocation(hots_variable):
