@@ -1,3 +1,4 @@
+# Libraries
 import numpy as np
 import os
 
@@ -11,7 +12,7 @@ def load_image(filename, folder="images"):
     return Image.open(image_path)
 
 
-def array2vector(image):
+def array2vector_rgb(image):
     height, width, channels = image.shape
     image_array_list = []
 
@@ -19,6 +20,17 @@ def array2vector(image):
         for column in range(width):
             for channel in range(channels):
                 image_array_list.append(image[row][column][channel])
+
+    return np.array(image_array_list)
+
+
+def array2vector_gray(image):
+    height, width= image.shape
+    image_array_list = []
+
+    for row in range(height):
+        for column in range(width):
+            image_array_list.append(image[row][column])
 
     return np.array(image_array_list)
 
