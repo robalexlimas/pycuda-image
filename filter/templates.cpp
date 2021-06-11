@@ -1,34 +1,37 @@
 __global__ void filter(float *image, float *kernel, float *imagefiltred)
 {
-    int tx = threadIdx.x + blockDim.x * blockIdx.x;
-    int ty = threadIdx.y + blockDim.y * blockIdx.y;
+    int global_index_thead_x = threadIdx.x + blockDim.x * blockIdx.x;
+    int global_index_thead_y = threadIdx.y + blockDim.y * blockIdx.y;
 
-    int kernelRowRadius = $height_filter / 2;
-    int kernelColRadius = $width_filter / 2;
+    int kernel_Row_Radius = $height_filter / 2;
+    int kernel_Column_Radius = $width_filter / 2;
 
-    float accum = 0;
+    float accumulator = 0;
 
-    if(ty < $height_image && tx < $width_image){
+    if(global_index_thead_y < $height_image && global_index_thead_x < $width_image){
 
-        int startRow = ty - kernelRowRadius;
-        int startColumn = tx - kernelColRadius;
+        int start_Row = global_index_thead_y - kernel_Row_Radius;
+        int start_Column = global_index_thead_x - kernel_Column_Radius;
 
-        for (int i = 0; i < $height_filter; i++){
-            for (int j = 0; j < $width_filter; j++){
+        for (int index_Row = 0; index_Row < $height_filter; index_Row++){
+            
+            for (int index_Column = 0; index_Column < $width_filter; index_Column++){
 
-                int currentRow = startRow + i;
-                int currentCol = startColumn + j;
+                int current_Row = start_Row + index_Row;
+                int current_Column = start_Column + index_Column;
 
-                if(currentRow >= 0 && currentRow < $height_image && currentCol >= 0 && currentCol < $width_image){
+                if(current_Row >= 0 && current_Row < $height_image && current_Column >= 0 && current_Column < $width_image){
                     
-                    accum += image[(currentRow * $width_image + currentCol)] * kernel[i * $height_filter +j];
+                    accumulator += image[(current_Row * $width_image + current_Column)] * kernel[index_Row * $height_filter + index_Column];
                 }
 
                 else{
-                    accum = 0;
+
+                    accumulator = 0;
                 }
             }
-        } 
-        imagefiltred[ty * $width_image + tx] = accum;
+        }
+         
+        imagefiltred[global_index_thead_y * $width_image + global_index_thead_x] = accumulator;
     }  
 }

@@ -12,10 +12,10 @@ def dilatation(binarized_image, filter):
     # Definition of necessary variables 
     height_image, width_image = binarized_image.shape
     height_filter, width_filter = filter.shape
-    rows_device = round(width_image/100)
-    columns_device = round(height_image/100)
+    rows_device = round(width_image / 100)
+    columns_device = round(height_image / 100)
 
-    # Definition of necessary variables 
+    # Creating vectors for processing
     binarized_image_host = np.array(binarized_image).astype(np.uint32)
     dilated_image_host = np.zeros((height_image, width_image)).astype(np.uint32)
     filter_host = np.array(filter).astype(np.uint32)
@@ -53,10 +53,10 @@ def erosion(binarized_image, filter):
     # Definition of necessary variables 
     height_image, width_image = binarized_image.shape
     height_filter, width_filter = filter.shape
-    rows_device = round(width_image/100)
-    columns_device = round(height_image/100)
+    rows_device = round(width_image / 100)
+    columns_device = round(height_image / 100)
 
-    # Definition of necessary variables 
+    # Creating vectors for processing
     binarized_image_host = np.array(binarized_image).astype(np.uint32)
     eroded_image_host = np.zeros((height_image, width_image)).astype(np.uint32)
     filter_host = np.array(filter).astype(np.uint32)

@@ -1,10 +1,10 @@
 import numpy as np
 
 # Importacion de librerias personalizadas
-from image import array2image, array2vector_rgb, array2vector_gray, load_image, save_image 
-from color_processing.processing import rgb2gray, gray2bin
-from morphology.processing import dilatation, erosion
+from color_processing.processing import gray2bin, rgb2gray
 from filter.processing import filter, kernel_selection
+from image import array2image, array2vector_rgb, load_image, save_image 
+from morphology.processing import dilatation, erosion
 
 
 def main():

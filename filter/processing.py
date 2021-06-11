@@ -12,15 +12,14 @@ def filter(gray_image, filter):
     # Definition of necessary variables 
     height_image, width_image = gray_image.shape
     height_filter, width_filter = filter.shape
-    rows_device = round(width_image/100)
-    columns_device = round(height_image/100)
+    rows_device = round(width_image / 100)
+    columns_device = round(height_image / 100)
 
     # Definition of necessary variables 
-    gray_image_host = np.array(gray_image).astype(np.float32)   #uint32
-    filter_host = np.array(filter) .astype(np.float32)
+    gray_image_host = np.array(gray_image).astype(np.float32)
+    filter_host = np.array(filter).astype(np.float32)
     filtered_image_host = np.zeros((height_image, width_image)).astype(np.float32)
 
-    # Required memory allocation of the device, for variables
     gray_image_device, kernel_device = copy_host_to_device(gray_image_host, filter_host)
     image_filtered_device = copy_host_to_device(filtered_image_host)
 

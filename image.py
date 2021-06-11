@@ -1,3 +1,4 @@
+# Libraries
 import numpy as np
 import os
 
@@ -12,9 +13,6 @@ def load_image(filename, folder="images"):
 
 
 def array2vector_rgb(image):
-    """
-    Metodo para convertir imagen de entrada a un vector
-    """
     height, width, channels = image.shape
     image_array_list = []
 

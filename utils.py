@@ -32,3 +32,4 @@ def _get_template(path):
     with open(path, "r") as file:
         template = file.readlines()
     return "".join(template)
+    
